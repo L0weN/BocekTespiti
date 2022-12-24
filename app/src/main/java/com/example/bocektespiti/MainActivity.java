@@ -18,6 +18,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.bocektespiti.ml.Model;
+
+import org.tensorflow.lite.DataType;
+import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
+
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -27,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     TextView result, confidence;
     ImageView imageView;
     Button camera,gallery;
-    int imageSize = 150;
+    int imageSize = 200;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -69,11 +74,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void classifyImage(Bitmap image){
-        /*try {
+        try {
             Model model = Model.newInstance(getApplicationContext());
 
             // Creates inputs for reference.
-            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 150, 150, 3}, DataType.FLOAT32);
+            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 200, 200, 3}, DataType.FLOAT32);
             ByteBuffer byteBuffer = ByteBuffer.allocateDirect(4*imageSize*imageSize*3);
             byteBuffer.order(ByteOrder.nativeOrder());
 
@@ -105,22 +110,34 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-            String classes[] = {"Bees","Beetles","Butterfly","Cicada","Dragonfly","Grasshopper","Moth","Scorpion","Snail","Spider"};
+            String classes[] = {"paddy stem maggot","yellow rice borer ","rice gall midge","Rice Stemfly ","brown plant hopper",
+                    "rice leafhopper","grain spreader thrips","rice shell pest","mole cricket","wireworm","white margined moth",
+                    "red spider","Potosiabre vitarsis","wheat blossom midge","penthaleus major","longlegged spider mite","wheat phloeothrips",
+                    "wheat sawfly","cerodonta denticornis","beet fly","Beet spot flies","meadow moth","beet weevil","sericaorient alismots chulsky",
+                    "alfalfa weevil","tarnished plant bug","Locustoidea","therioaphis maculata Buckton","odontothrips loti","alfalfa seed chalcid",
+                    "Pieris canidia","Apolygus lucorum","Viteus vitifoliae","Colomerus vitis","Brevipoalpus lewisi McGregor",
+                    "oides decempunctata","Polyphagotars onemus latus","Pseudococcus comstocki Kuwana","parathrene regalis",
+                    "Ampelophaga","Trialeurodes vaporariorum","Erythroneura apicalis","Papilio xuthus","Panonchus citri McGregor",
+                    "Phyllocoptes oleiverus ashmead","Icerya purchasi Maskell","Unaspis yanonensis","Ceroplastes rubens","Chrysomphalus aonidum",
+                    "Parlatoria zizyphus Lucus","Nipaecoccus vastalor","Aleurocanthus spiniferus","Tetradacus c Bactrocera minax","Dacus dorsalis(Hendel)",
+                    "Bactrocera tsuneonis","Adristyrannus","Phyllocnistis citrella Stainton","Toxoptera citricidus","Toxoptera aurantii",
+                    "Aphis citricola Vander Goot","Dasineura sp","Lawana imitata Melichar","Salurnis marginella Guerr","Deporaus marginatus Pascoe",
+                    "Chlumetia transversa","Mango flat beak leafhopper",};
 
             result.setText(classes[maxPos]);
 
-            String s = "";
-            for (int i = 0; i< classes.length; i++){
+            /*String s = "";
+            for (int i = 0; i< 10; i++){
                 s += String.format("%s: %.1f%%\n",classes[i],confidences[i]*100);
             }
-            confidence.setText(s);
+            confidence.setText(s);*/
 
             // Releases model resources if no longer used.
             model.close();
         } catch (IOException e) {
             // TODO Handle the exception
         }
-        */
+
     }
 
     @Override
